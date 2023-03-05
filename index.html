@@ -10,20 +10,25 @@
   </head>
   <body>
     <div id="app">
-      <input type="text" id="inputTexto" />
-      <br />
-      <select id="opcoes">
-        <option value="A">Opção 1</option>
-        <option value="B">Opção 2</option>
-        <option value="B">Opção 3</option>
-      </select>
-      <button @click="selecionarElementoFilho()">Botão</button>
+      <button @click="exibirSaldo = !exibirSaldo">
+        <span v-if="!exibirSaldo"> Exibir Saldo </span>
+        <span v-if="exibirSaldo"> Ocultar Saldo </span>
+      </button>
+      <p>Saldo: <span v-if="exibirSaldo"> R$ {{ saldo }} </span></p>
+
+      <hr />
+      Idade: <input type="text" id="inputIdade" @blur="setIdade()" />
+      <p v-if="idade < 18">Menor de Idade</p>
+      <p v-else>Maior de Idade</p>
     </div>
 
     <script>
       const vm = new Vue({
         el: "#app",
         data: {
+          idade: 0,
+          saldo: 456.56,
+          exibirSaldo: false,
           cliques: 0,
           formulario: "",
           teclas: "",
@@ -109,6 +114,10 @@
           selecionarElementoFilho() {
             console.log("Texto do Input ", inputTexto.value);
             console.log("Valor do Select ", opcoes.value);
+          },
+          setIdade() {
+            console.log("Texto do Input ", inputIdade.value);
+            this.idade = inputIdade.value;
           },
         },
       });
