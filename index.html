@@ -10,17 +10,30 @@
   </head>
   <body>
     <div id="app">
-      <input type="text" @keyup="imprimirTexto" />
-      <button @click="mensagemAlerta">Botão</button>
+      <div class="borda div-principal" :class="cor">
+        Cor: {{ cor }}
+        <br />
+        Posicção X do Mouse: {{ posicaoX }} Posicção Y do Mouse: {{ posicaoY }}
+      </div>
+      <hr />
+      <div @click="mudarCor('verde')" class="borda div-comum"></div>
+      <div
+        @mouseover="mudarCor('azul')"
+        @mouseout="mudarCor('vermelho')"
+        class="borda div-comum"
+      ></div>
+      <div @mousemove="coordenadas($event)" class="borda div-comum"></div>
     </div>
 
     <script>
       const vm = new Vue({
         el: "#app",
         data: {
+          cor: "branco",
+          posicaoX: 0,
+          posicaoY: 0,
           mensagem: "Expressão",
           site: "https://jorgesantana.net.br",
-          cor: "verde",
           estilo: "azul",
           teste: false,
           instrucaoDePreenchimento: "Informe aqui sua pesquisa",
@@ -74,6 +87,13 @@
           mensagemAlerta() {
             alert("Mensagem de alerta");
           },
+          mudarCor(c) {
+            this.cor = c;
+          },
+          coordenadas(e) {
+            this.posicaoX = e.clientX;
+            this.posicaoY = e.clientY;
+          },
         },
       });
     </script>
@@ -82,11 +102,29 @@
     .verde {
       background-color: green;
     }
+    .branco {
+      background-color: white;
+    }
     .negrito {
       font-weight: bold;
     }
     .azul {
       background-color: blue;
+    }
+    .vermelho {
+      background-color: red;
+    }
+    .borda {
+      border: 1px solid;
+    }
+    .div-principal {
+      width: 200px;
+      height: 200px;
+    }
+    .div-comum {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
     }
   </style>
 </html>
