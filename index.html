@@ -10,8 +10,8 @@
   </head>
   <body>
     <div id="app">
-      {{ mensagem.substr(0,3) }}
-      <input :value="2 + 2" :class="teste ? 'verde' : estilo" />
+      <input type="text" @keyup="imprimirTexto" />
+      <button @click="mensagemAlerta">Botão</button>
     </div>
 
     <script>
@@ -67,6 +67,12 @@
           },
           numeroAleatorio() {
             return Math.random();
+          },
+          imprimirTexto() {
+            console.log("Teste");
+          },
+          mensagemAlerta() {
+            alert("Mensagem de alerta");
           },
         },
       });
