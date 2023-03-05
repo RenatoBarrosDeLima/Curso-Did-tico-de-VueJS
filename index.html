@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ mensagem.substr(0,3) }}
+      <input :value="2 + 2" :class="teste ? 'verde' : estilo" />
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          mensagem: "Expressão",
+          site: "https://jorgesantana.net.br",
+          cor: "verde",
+          estilo: "azul",
+          teste: false,
+          instrucaoDePreenchimento: "Informe aqui sua pesquisa",
+          valor: "Valor informado",
+          check: true,
+          n1: 10,
+          n2: 5,
+          valorTotal: 150.47,
+          logado: false,
+          hobbies: [
+            "Dormir",
+            "Colecionar video games antigos",
+            "Correr",
+            "Trilhas",
+          ],
+          perfil: {
+            nome: "Jorge Santana",
+            site: "jorgesantana.net.br",
+            idade: 32,
+            cursos: [
+              {
+                nome: "Laravel",
+                cargaHoraria: "50 horas",
+              },
+              {
+                nome: "Bancos de Dados Relacionais",
+                cargaHoraria: "40 horas",
+              },
+            ],
+          },
+        },
+        methods: {
+          somar: function somar() {
+            return this.n1 + this.n2;
+          },
+          subtrair: function () {
+            return this.n1 - this.n2;
+          },
+          multiplicar: () => {
+            return this.n1 * this.n2; //Contexto Léxico, o uso assim é considerado incorreto, porque arrayfunctions fazem referência so contexto global do windows e não do contexto do VUE
+          },
+          dividir() {
+            return this.n1 / this.n2;
+          },
+          numeroAleatorio() {
+            return Math.random();
+          },
+        },
+      });
+    </script>
+  </body>
+  <style>
+    .verde {
+      background-color: green;
+    }
+    .negrito {
+      font-weight: bold;
+    }
+    .azul {
+      background-color: blue;
+    }
+  </style>
+</html>
