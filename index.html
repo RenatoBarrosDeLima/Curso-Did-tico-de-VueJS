@@ -10,26 +10,14 @@
   </head>
   <body>
     <div id="app">
-      <a
-        href="https://jorgesantana.net.br"
-        target="_blank"
-        @click="prevenirComportamentoPadrao($event)"
-      >
-        Link
-      </a>
+      <input type="text" id="inputTexto" />
       <br />
-      Mensagem: {{ msg }}
-      <hr />
-      <button @click.once="executarUmaVez()">Botão</button>
-      <p>Cliques: {{ cliques }}</p>
-      <hr />
-      <form @submit.prevent.once="previnirUmaVez()">
-        <button type="submit">Enviar</button>
-      </form>
-      <p>Formuário: {{ formulario }}</p>
-      <hr />
-      <input type="text" @keyup="capturandoTeclas($event)" />
-      <p>Teclas: {{ teclas }}</p>
+      <select id="opcoes">
+        <option value="A">Opção 1</option>
+        <option value="B">Opção 2</option>
+        <option value="B">Opção 3</option>
+      </select>
+      <button @click="selecionarElementoFilho()">Botão</button>
     </div>
 
     <script>
@@ -117,6 +105,10 @@
           },
           capturandoTeclas(e) {
             this.teclas += e.key;
+          },
+          selecionarElementoFilho() {
+            console.log("Texto do Input ", inputTexto.value);
+            console.log("Valor do Select ", opcoes.value);
           },
         },
       });
