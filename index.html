@@ -10,26 +10,37 @@
   </head>
   <body>
     <div id="app">
-      <div class="borda div-principal" :class="cor">
-        Cor: {{ cor }}
-        <br />
-        Posicção X do Mouse: {{ posicaoX }} Posicção Y do Mouse: {{ posicaoY }}
-      </div>
+      <a
+        href="https://jorgesantana.net.br"
+        target="_blank"
+        @click="prevenirComportamentoPadrao($event)"
+      >
+        Link
+      </a>
+      <br />
+      Mensagem: {{ msg }}
       <hr />
-      <div @click="mudarCor('verde')" class="borda div-comum"></div>
-      <div
-        @mouseover="mudarCor('azul')"
-        @mouseout="mudarCor('vermelho')"
-        class="borda div-comum"
-      ></div>
-      <div @mousemove="coordenadas($event)" class="borda div-comum"></div>
+      <button @click.once="executarUmaVez()">Botão</button>
+      <p>Cliques: {{ cliques }}</p>
+      <hr />
+      <form @submit.prevent.once="previnirUmaVez()">
+        <button type="submit">Enviar</button>
+      </form>
+      <p>Formuário: {{ formulario }}</p>
+      <hr />
+      <input type="text" @keyup="capturandoTeclas($event)" />
+      <p>Teclas: {{ teclas }}</p>
     </div>
 
     <script>
       const vm = new Vue({
         el: "#app",
         data: {
+          cliques: 0,
+          formulario: "",
+          teclas: "",
           cor: "branco",
+          msg: "",
           posicaoX: 0,
           posicaoY: 0,
           mensagem: "Expressão",
@@ -93,6 +104,19 @@
           coordenadas(e) {
             this.posicaoX = e.clientX;
             this.posicaoY = e.clientY;
+          },
+          prevenirComportamentoPadrao(e) {
+            e.preventDefault();
+            this.msg = "Comportamento padrão ativado";
+          },
+          executarUmaVez() {
+            this.cliques++;
+          },
+          previnirUmaVez() {
+            this.formulario = "Prevenindo o comportamento padrão";
+          },
+          capturandoTeclas(e) {
+            this.teclas += e.key;
           },
         },
       });
